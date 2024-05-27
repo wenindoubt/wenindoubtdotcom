@@ -32,6 +32,7 @@ export default function Navbar() {
         borderStyle={"solid"}
         borderColor={useColorModeValue("gray.200", "gray.900")}
         align={"center"}
+        justify={"space-between"}
       >
         <Flex flex={{ base: 1, md: "auto" }} ml={{ base: -2 }} display={{ base: "flex", md: "none" }}>
           <IconButton
@@ -51,10 +52,14 @@ export default function Navbar() {
               WenInDoubt
             </Text>
           </Link>
+        </Flex>
 
-          <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <DesktopNav />
-          </Flex>
+        <Flex flex={{ base: 1 }} justify={"center"} display={{ base: "none", md: "flex" }}>
+          <DesktopNav />
+        </Flex>
+
+        <Flex flex={{ base: 1, md: "auto" }} ml={{ base: -2 }} display={{ base: "none", md: "flex" }}>
+          {/* Add other right-aligned content here if needed */}
         </Flex>
       </Flex>
 
@@ -209,6 +214,10 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
+    label: "Real Estate Portfolio",
+    href: "/real-estate-portfolio",
+  },
+  {
     label: "Great Park Neighborhoods",
     children: [
       {
@@ -223,16 +232,8 @@ const NAV_ITEMS: Array<NavItem> = [
       },
     ],
   },
-  {
-    label: "Real Estate Portfolio",
-    href: "/real-estate-portfolio",
-  },
-  {
-    label: "Blog",
-    href: "/blog",
-  },
-  {
-    label: "About Us",
-    href: "/about-us",
-  },
+  // {
+  //   label: "Blog",
+  //   href: "/blog",
+  // },
 ];

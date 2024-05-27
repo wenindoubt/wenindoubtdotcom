@@ -1,74 +1,136 @@
 "use client";
-import { Box, Button, Container, Heading, Icon, Stack, Text, createIcon, useColorModeValue } from "@chakra-ui/react";
-import Head from "next/head";
+import StatisticsWithIcons from "@/components/StatisticsWithIcons";
+import { Box, Container, Divider, HStack, Heading, Image, Text, VStack, useColorModeValue } from "@chakra-ui/react";
+import { FaGraduationCap, FaHandsHelping, FaHeart, FaPlane, FaUserGraduate } from "react-icons/fa";
 
 export default function Hero() {
-  return (
-    <>
-      <Head>
-        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet" />
-      </Head>
+  const textColor = useColorModeValue("gray.700", "gray.200");
+  const sectionColor = useColorModeValue("gray.800", "gray.300");
+  const bgGradient = useColorModeValue("linear(to-r, teal.200, teal.500)", "linear(to-r, teal.600, teal.800)");
 
-      <Container maxW={"3xl"}>
-        <Stack as={Box} textAlign={"center"} spacing={{ base: 8, md: 14 }} py={{ base: 20, md: 36 }}>
-          <Heading fontWeight={600} fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }} lineHeight={"110%"}>
-            WenInDoubt <br />
-            <Text as={"span"} color={"green.400"}>
-              Navigate with Confidence
-            </Text>
-          </Heading>
-          <Text color={"gray.500"}>
-            Founded by a dynamic couple driven by entrepreneurial spirit and a love for real estate, we are on a mission
-            to live life fully—embracing health, happiness, and the freedom to explore the world on our terms.
-          </Text>
-          <Stack direction={"column"} spacing={3} align={"center"} alignSelf={"center"} position={"relative"}>
-            <Button
-              colorScheme={"green"}
-              bg={"green.400"}
-              rounded={"full"}
-              px={6}
-              _hover={{
-                bg: "green.500",
-              }}
-            >
-              Get Started
-            </Button>
-            <Box>
-              <Icon
-                as={Arrow}
-                color={useColorModeValue("gray.800", "gray.300")}
-                w={71}
-                position={"absolute"}
-                right={-71}
-                top={"10px"}
-              />
-              <Text
-                fontSize={"lg"}
-                fontFamily={"Caveat"}
-                position={"absolute"}
-                right={"-125px"}
-                top={"-15px"}
-                transform={"rotate(10deg)"}
-              >
-                Starting at $69,420/mo
+  return (
+    <Box bg={bgGradient} py="12">
+      <Container maxW={"7xl"}>
+        <Box display="flex" justifyContent="center" mb="10">
+          <Image
+            borderRadius="lg"
+            src={"/about-us.jpeg"}
+            alt="some good alt text"
+            objectFit="contain"
+            width="60%"
+            transition="0.3s ease-in-out"
+            boxShadow="lg"
+            border="2px solid"
+            borderColor={useColorModeValue("gray.200", "gray.700")}
+            _hover={{
+              transform: "scale(1.05)",
+            }}
+          />
+        </Box>
+        <StatisticsWithIcons />
+        <VStack paddingTop="40px" spacing="8" alignItems="flex-start">
+          <Box bg={useColorModeValue("gray.100", "gray.700")} p="4" borderRadius="md" boxShadow="md" width="100%">
+            <Heading as="h2" fontSize="3xl" textAlign="center" color={textColor}>
+              From College Sweethearts to Lifelong Partners
+            </Heading>
+          </Box>
+
+          <Divider borderColor={sectionColor} />
+
+          <Box>
+            <HStack>
+              <FaGraduationCap />
+              <Heading as="h3" fontSize="xl" color={sectionColor}>
+                Our Beginning
+              </Heading>
+            </HStack>
+            <Text as="p" fontSize="lg" color={textColor}>
+              Welcome to our corner of the internet! We&apos;re{" "}
+              <Text as={"b"} color={"green.400"}>
+                Jeffrey
+              </Text>{" "}
+              and{" "}
+              <Text as={"b"} color={"green.400"}>
+                Linjing
               </Text>
-            </Box>
-          </Stack>
-        </Stack>
+              , a dynamic duo who met at Rensselaer Polytechnic Institute in the charming town of Troy, New York. Our
+              story began in the fall of 2011 when mutual friends introduced us. By December of that year, we were
+              officially a couple. Just a few years later, on February 18, 2014, we eloped to the historic City Hall in
+              Boston, Massachusetts to tie the knot.
+            </Text>
+          </Box>
+
+          <Divider borderColor={sectionColor} />
+
+          <Box>
+            <HStack>
+              <FaUserGraduate />
+              <Heading as="h3" fontSize="xl" color={sectionColor}>
+                Our Backgrounds
+              </Heading>
+            </HStack>
+            <Text as="p" fontSize="lg" color={textColor}>
+              Jeffrey holds a degree in Computer & Systems Engineering, bringing a wealth of technical expertise to our
+              team.
+            </Text>
+            <Text as="p" fontSize="lg" color={textColor}>
+              Linjing complements this with an MBA in Accounting and Finance, ensuring we have a strong foundation in
+              both technology and business.
+            </Text>
+            <Text as="p" fontSize="lg" color={textColor}>
+              Together, we blend our skills to tackle challenges with precision and financial acumen, making us a
+              dynamic duo in both our personal and professional lives.
+            </Text>
+          </Box>
+
+          <Divider borderColor={sectionColor} />
+
+          <Box>
+            <HStack>
+              <FaPlane />
+              <Heading as="h3" fontSize="xl" color={sectionColor}>
+                Our Move to California
+              </Heading>
+            </HStack>
+            <Text as="p" fontSize="lg" color={textColor}>
+              After a few years of East Coast living, we decided to trade the cold winters for the sunny skies of
+              California. We first settled in Orange, California, on April 29, 2017, but soon found our forever home in
+              Irvine, where we’ve been enjoying the vibrant community and fantastic weather ever since.
+            </Text>
+          </Box>
+
+          <Divider borderColor={sectionColor} />
+
+          <Box>
+            <HStack>
+              <FaHeart />
+              <Heading as="h3" fontSize="xl" color={sectionColor}>
+                Our Journey Together
+              </Heading>
+            </HStack>
+            <Text as="p" fontSize="lg" color={textColor}>
+              We’ve been married for over a decade now, and our journey together has been nothing short of amazing.
+              We’ve shared countless adventures, both big and small, and we’re excited to continue this journey with you
+              as we explore new horizons.
+            </Text>
+          </Box>
+
+          <Divider borderColor={sectionColor} />
+
+          <Box>
+            <HStack>
+              <FaHandsHelping />
+              <Heading as="h3" fontSize="xl" color={sectionColor}>
+                Thank You
+              </Heading>
+            </HStack>
+            <Text as="p" fontSize="lg" color={textColor}>
+              Thank you for stopping by and getting to know us a little better. We hope our story inspires you and
+              brings a smile to your face. Here’s to many more adventures, both online and off!
+            </Text>
+          </Box>
+        </VStack>
       </Container>
-    </>
+    </Box>
   );
 }
-
-const Arrow = createIcon({
-  displayName: "Arrow",
-  viewBox: "0 0 72 24",
-  path: (
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M0.600904 7.08166C0.764293 6.8879 1.01492 6.79004 1.26654 6.82177C2.83216 7.01918 5.20326 7.24581 7.54543 7.23964C9.92491 7.23338 12.1351 6.98464 13.4704 6.32142C13.84 6.13785 14.2885 6.28805 14.4722 6.65692C14.6559 7.02578 14.5052 7.47362 14.1356 7.6572C12.4625 8.48822 9.94063 8.72541 7.54852 8.7317C5.67514 8.73663 3.79547 8.5985 2.29921 8.44247C2.80955 9.59638 3.50943 10.6396 4.24665 11.7384C4.39435 11.9585 4.54354 12.1809 4.69301 12.4068C5.79543 14.0733 6.88128 15.8995 7.1179 18.2636C7.15893 18.6735 6.85928 19.0393 6.4486 19.0805C6.03792 19.1217 5.67174 18.8227 5.6307 18.4128C5.43271 16.4346 4.52957 14.868 3.4457 13.2296C3.3058 13.0181 3.16221 12.8046 3.01684 12.5885C2.05899 11.1646 1.02372 9.62564 0.457909 7.78069C0.383671 7.53862 0.437515 7.27541 0.600904 7.08166ZM5.52039 10.2248C5.77662 9.90161 6.24663 9.84687 6.57018 10.1025C16.4834 17.9344 29.9158 22.4064 42.0781 21.4773C54.1988 20.5514 65.0339 14.2748 69.9746 0.584299C70.1145 0.196597 70.5427 -0.0046455 70.931 0.134813C71.3193 0.274276 71.5206 0.70162 71.3807 1.08932C66.2105 15.4159 54.8056 22.0014 42.1913 22.965C29.6185 23.9254 15.8207 19.3142 5.64226 11.2727C5.31871 11.0171 5.26415 10.5479 5.52039 10.2248Z"
-      fill="currentColor"
-    />
-  ),
-});
