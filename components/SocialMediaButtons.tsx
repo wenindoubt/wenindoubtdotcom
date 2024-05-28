@@ -1,5 +1,7 @@
 "use client";
-import { Button, Center, Link, Stack, Text } from "@chakra-ui/react";
+
+import { Box, Button, Center, Link, Stack, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { SiLinkedin } from "react-icons/si";
 
@@ -9,9 +11,49 @@ type SocialButtonsProps = {
   instagramLink: string;
 };
 
+const isMobileDevice = () => {
+  if (typeof window !== "undefined" && typeof navigator !== "undefined") {
+    return /Mobi|Android/i.test(navigator.userAgent);
+  }
+  return false;
+};
+
+const getFacebookAppLink = (url: string) => {
+  // Check if the URL is a profile link
+  const profileMatch = url.match(/facebook\.com\/([^/?]+)/);
+  if (profileMatch) {
+    const profileId = profileMatch[1];
+    return `fb://profile/${profileId}`;
+  }
+  return url;
+};
+
 export default function SocialMediaButtons({ instagramLink, facebookLink, linkedinLink }: SocialButtonsProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+  }, []);
+
+  const getFacebookLink = () => {
+    if (isMobile) {
+      return getFacebookAppLink(facebookLink);
+    }
+    return facebookLink;
+  };
+
   return (
     <Stack spacing={4} mt={4}>
+      {isMobile ? (
+        <Box bg="yellow.100" p={4} borderRadius="md">
+          <Text>You are using a mobile device.</Text>
+        </Box>
+      ) : (
+        <Box bg="blue.100" p={4} borderRadius="md">
+          <Text>You are not using a mobile device.</Text>
+        </Box>
+      )}
+
       <Link href={instagramLink} isExternal w={"full"}>
         <Button
           w={"full"}
@@ -30,7 +72,7 @@ export default function SocialMediaButtons({ instagramLink, facebookLink, linked
         </Button>
       </Link>
 
-      <Link href={facebookLink} isExternal w={"full"}>
+      <Link href={getFacebookLink()} isExternal w={"full"}>
         <Button
           w={"full"}
           colorScheme={"facebook"}
