@@ -9,9 +9,15 @@ import {
   ListItem,
   SimpleGrid,
   Stack,
+  Tag,
+  TagLabel,
+  TagLeftIcon,
   Text,
+  Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { addMonths, differenceInDays, differenceInMonths } from "date-fns";
+import { FaCheck, FaInfoCircle, FaTimes } from "react-icons/fa";
 
 export default function Properties() {
   const properties = [
@@ -24,6 +30,8 @@ export default function Properties() {
       details: ["House Hacking", "Roommate", "Homebase"],
       color: "green.500",
       bgColor: "green.50",
+      purchasedDate: "12-20-2021",
+      sold: false,
     },
     {
       title: "Investment",
@@ -34,6 +42,8 @@ export default function Properties() {
       details: ["Duplex", "Co-Managing Members", "Long Term Rental"],
       color: "purple.500",
       bgColor: "green.50",
+      purchasedDate: "01-31-2023",
+      sold: false,
     },
     {
       title: "Investment",
@@ -44,6 +54,8 @@ export default function Properties() {
       details: ["61-Units", "Syndication", "Limited Partners"],
       color: "purple.500",
       bgColor: "green.50",
+      purchasedDate: "05-31-2024",
+      sold: false,
     },
     {
       title: "Investment",
@@ -54,9 +66,20 @@ export default function Properties() {
       details: ["Duplex", "Co-Managing Members", "4-Month Fix & Flip"],
       color: "red.500",
       bgColor: "red.50",
-      sold: true, // Add a sold property indicator
+      purchasedDate: "11-08-2023",
+      soldDate: "03-01-2024",
+      sold: true,
     },
   ];
+
+  const calculateHoldDuration = (purchasedDate: string, soldDate: string) => {
+    const start = new Date(purchasedDate);
+    const end = new Date(soldDate);
+    const months = differenceInMonths(end, start);
+    const intermediateDate = addMonths(start, months);
+    const days = differenceInDays(end, intermediateDate);
+    return `${months > 0 ? `${months} month${months > 1 ? "s" : ""} ` : ""}${days > 0 ? `${days} day${days > 1 ? "s" : ""}` : ""}`;
+  };
 
   const bgColor = useColorModeValue("white", "gray.800");
   const textColor = useColorModeValue("gray.800", "white");
@@ -70,7 +93,7 @@ export default function Properties() {
             <Box maxW={"330px"} w={"full"} bg={bgColor} boxShadow={"2xl"} rounded={"md"} overflow={"hidden"}>
               <Box position="relative">
                 <Box h={"160px"} bgImage={`url(${property.imageUrl})`} bgSize={"cover"} bgPosition={"center"} />
-                {property.sold && (
+                {property.sold ? (
                   <Badge
                     position="absolute"
                     top="10px"
@@ -79,8 +102,24 @@ export default function Properties() {
                     fontSize="0.9em"
                     padding="4px 8px"
                     borderRadius="md"
+                    display="flex"
+                    alignItems="center"
                   >
-                    SOLD
+                    <FaTimes style={{ marginRight: "4px" }} /> SOLD
+                  </Badge>
+                ) : (
+                  <Badge
+                    position="absolute"
+                    top="10px"
+                    left="10px"
+                    colorScheme="green"
+                    fontSize="0.9em"
+                    padding="4px 8px"
+                    borderRadius="md"
+                    display="flex"
+                    alignItems="center"
+                  >
+                    <FaCheck style={{ marginRight: "4px" }} /> HOLDING
                   </Badge>
                 )}
               </Box>
@@ -117,6 +156,26 @@ export default function Properties() {
                     </ListItem>
                   ))}
                 </List>
+                <Box mt={4}>
+                  <Tag size="lg" colorScheme="green" borderRadius="full">
+                    <TagLeftIcon as={FaCheck} />
+                    <TagLabel>Purchased: {property.purchasedDate}</TagLabel>
+                  </Tag>
+                  {property.sold && property.soldDate && (
+                    <>
+                      <Tag size="lg" colorScheme="red" borderRadius="full" ml={2}>
+                        <TagLeftIcon as={FaTimes} />
+                        <TagLabel>Sold: {property.soldDate}</TagLabel>
+                      </Tag>
+                      <Tooltip label={`Held for ${calculateHoldDuration(property.purchasedDate, property.soldDate)}`}>
+                        <Tag size="lg" colorScheme="blue" borderRadius="full" ml={2} cursor="pointer">
+                          <TagLeftIcon as={FaInfoCircle} />
+                          <TagLabel>{`Held: ${calculateHoldDuration(property.purchasedDate, property.soldDate)}`}</TagLabel>
+                        </Tag>
+                      </Tooltip>
+                    </>
+                  )}
+                </Box>
               </Box>
             </Box>
           </Center>
