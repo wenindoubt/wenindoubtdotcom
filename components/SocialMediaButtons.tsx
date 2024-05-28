@@ -1,7 +1,6 @@
 "use client";
 
-import { Box, Button, Center, Link, Stack, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Button, Center, Link, Stack, Text } from "@chakra-ui/react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { SiLinkedin } from "react-icons/si";
 
@@ -11,48 +10,24 @@ type SocialButtonsProps = {
   instagramLink: string;
 };
 
-const isMobileDevice = () => {
-  if (typeof window !== "undefined" && typeof navigator !== "undefined") {
-    return /Mobi|Android/i.test(navigator.userAgent);
-  }
-  return false;
-};
-
-const getFacebookAppLink = (url: string) => {
-  // Check if the URL is a profile link
-  const profileMatch = url.match(/facebook\.com\/([^/?]+)/);
-  if (profileMatch) {
-    const profileId = profileMatch[1];
-    return `fb://profile/${profileId}`;
-  }
-  return url;
-};
-
-export default function SocialMediaButtons({ instagramLink, facebookLink, linkedinLink }: SocialButtonsProps) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-  }, []);
-
-  const getFacebookLink = () => {
-    if (isMobile) {
-      return getFacebookAppLink(facebookLink);
-    }
-    return facebookLink;
-  };
-
+export default function SocialMediaButtons({ instagramLink, linkedinLink }: SocialButtonsProps) {
   return (
     <Stack spacing={4} mt={4}>
-      {isMobile ? (
-        <Box bg="yellow.100" p={4} borderRadius="md">
-          <Text>You are using a mobile device.</Text>
-        </Box>
-      ) : (
-        <Box bg="blue.100" p={4} borderRadius="md">
-          <Text>You are not using a mobile device.</Text>
-        </Box>
-      )}
+      <Link href={linkedinLink} isExternal w={"full"}>
+        <Button
+          w={"full"}
+          colorScheme={"messenger"}
+          leftIcon={<SiLinkedin />}
+          _hover={{
+            transform: "translateY(-2px)",
+            boxShadow: "lg",
+          }}
+        >
+          <Center>
+            <Text>LinkedIn</Text>
+          </Center>
+        </Button>
+      </Link>
 
       <Link href={instagramLink} isExternal w={"full"}>
         <Button
@@ -72,37 +47,22 @@ export default function SocialMediaButtons({ instagramLink, facebookLink, linked
         </Button>
       </Link>
 
-      <Link href={getFacebookLink()} isExternal w={"full"}>
-        <Button
-          w={"full"}
-          colorScheme={"facebook"}
-          leftIcon={<FaFacebook />}
-          _hover={{
-            transform: "translateY(-2px)",
-            boxShadow: "lg",
-          }}
-        >
-          <Center>
-            <Text>Facebook</Text>
-          </Center>
-        </Button>
-      </Link>
-
-      <Link href={linkedinLink} isExternal w={"full"}>
-        <Button
-          w={"full"}
-          colorScheme={"messenger"}
-          leftIcon={<SiLinkedin />}
-          _hover={{
-            transform: "translateY(-2px)",
-            boxShadow: "lg",
-          }}
-        >
-          <Center>
-            <Text>LinkedIn</Text>
-          </Center>
-        </Button>
-      </Link>
+      <Button
+        w={"full"}
+        colorScheme={"facebook"}
+        leftIcon={<FaFacebook />}
+        _hover={{
+          transform: "translateY(-2px)",
+          boxShadow: "lg",
+        }}
+        isDisabled
+        opacity={0.6} // to visually indicate the button is disabled
+        cursor="not-allowed" // change cursor to indicate non-clickable
+      >
+        <Center>
+          <Text>Facebook</Text>
+        </Center>
+      </Button>
     </Stack>
   );
 }
