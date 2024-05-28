@@ -11,13 +11,13 @@ export default function Hero() {
   return (
     <Box bg={bgGradient} py="12">
       <Container maxW={"7xl"}>
-        <Box display="flex" justifyContent="center" mb="10">
+        <Box display="flex" justifyContent="center">
           <Image
             borderRadius="lg"
             src={"/about-us.jpeg"}
             alt="some good alt text"
             objectFit="contain"
-            width="60%"
+            width={{ base: "90%", md: "60%" }} // Adjust the width for mobile and larger screens
             transition="0.3s ease-in-out"
             boxShadow="lg"
             border="2px solid"

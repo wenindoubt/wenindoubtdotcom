@@ -42,7 +42,7 @@ function StatsCard(props: StatsCardProps) {
 
 export default function StatisticsWithIcons() {
   return (
-    <Box maxW="7xl" mx={"auto"} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
+    <Box maxW="7xl" mx={"auto"} px={{ base: 2, sm: 12, md: 17 }}>
       <chakra.h1 textAlign={"center"} fontSize={"4xl"} py={10} fontWeight={"bold"}>
         Milestones
       </chakra.h1>
