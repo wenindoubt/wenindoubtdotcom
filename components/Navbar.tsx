@@ -91,8 +91,11 @@ const DesktopNav = () => {
                   textDecoration: "none",
                   color: linkHoverColor,
                 }}
+                display="flex"
+                alignItems="center"
               >
                 {navItem.label}
+                {navItem.children && <ChevronDownIcon ml={2} />}
               </Link>
             </PopoverTrigger>
 
@@ -223,12 +226,7 @@ const NAV_ITEMS: Array<NavItem> = [
       {
         label: "Business Club",
         subLabel: "Engage, Learn, and Network",
-        href: "#",
-      },
-      {
-        label: "Sub Nav Bar 1",
-        subLabel: "Sub Nav Bar 1 Label",
-        href: "#",
+        href: "/great-park-neighborhoods/business-club",
       },
     ],
   },

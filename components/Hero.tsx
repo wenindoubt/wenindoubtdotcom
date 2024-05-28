@@ -1,7 +1,7 @@
 "use client";
 import StatisticsWithIcons from "@/components/StatisticsWithIcons";
 import { Box, Container, Divider, HStack, Heading, Image, Text, VStack, useColorModeValue } from "@chakra-ui/react";
-import { FaGraduationCap, FaHandsHelping, FaHeart, FaPlane, FaUserGraduate } from "react-icons/fa";
+import { FaHandsHelping, FaHeart, FaHistory, FaPlane, FaUserGraduate } from "react-icons/fa";
 
 export default function Hero() {
   const textColor = useColorModeValue("gray.700", "gray.200");
@@ -39,7 +39,7 @@ export default function Hero() {
 
           <Box>
             <HStack>
-              <FaGraduationCap />
+              <FaHistory />
               <Heading as="h3" fontSize="xl" color={sectionColor}>
                 Our Beginning
               </Heading>
