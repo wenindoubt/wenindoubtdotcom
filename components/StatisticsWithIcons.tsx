@@ -56,7 +56,7 @@ export default function StatisticsWithIcons() {
           stat={"February 18th, 2024"}
           icon={<PiCheersFill size={"3em"} />}
         />
-        <StatsCard title={"Net Worth"} stat={"$1,000,000+"} icon={<AiFillDollarCircle size={"3em"} />} />
+        <StatsCard title={"Net Worth"} stat={"Two Comma Club"} icon={<AiFillDollarCircle size={"3em"} />} />
       </SimpleGrid>
     </Box>
   );
