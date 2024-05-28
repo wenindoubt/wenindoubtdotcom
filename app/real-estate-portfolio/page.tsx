@@ -1,12 +1,11 @@
 "use client";
-import CurrentProperties from "@/components/CurrentProperties";
-import SoldProperties from "@/components/SoldProperties";
+
+import Properties from "@/components/Properties";
 
 export default function RealEstatePortfolio() {
   return (
     <>
-      <CurrentProperties />
-      <SoldProperties />
+      <Properties />
     </>
   );
 }

@@ -33,6 +33,7 @@ export default function Navbar() {
         borderColor={useColorModeValue("gray.200", "gray.900")}
         align={"center"}
         justify={"space-between"}
+        wrap="nowrap"
       >
         <Flex flex={{ base: 1, md: "auto" }} ml={{ base: -2 }} display={{ base: "flex", md: "none" }}>
           <IconButton
@@ -47,6 +48,8 @@ export default function Navbar() {
             <Text
               textAlign={useBreakpointValue({ base: "center", md: "left" })}
               fontFamily={"heading"}
+              fontSize={{ base: "2xl", md: "2xl" }}
+              fontWeight={"bold"}
               color={useColorModeValue("gray.800", "white")}
             >
               WenInDoubt
@@ -54,7 +57,7 @@ export default function Navbar() {
           </Link>
         </Flex>
 
-        <Flex flex={{ base: 1 }} justify={"center"} display={{ base: "none", md: "flex" }}>
+        <Flex flex={{ base: 1 }} justify={"center"} display={{ base: "none", md: "flex" }} wrap="nowrap">
           <DesktopNav />
         </Flex>
 
@@ -76,7 +79,7 @@ const DesktopNav = () => {
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Stack direction={"row"} spacing={4}>
+    <Stack direction={"row"} spacing={6} wrap="nowrap">
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
@@ -84,8 +87,8 @@ const DesktopNav = () => {
               <Link
                 p={2}
                 href={navItem.href ?? "#"}
-                fontSize={"sm"}
-                fontWeight={500}
+                fontSize={{ base: "lg", md: "lg" }}
+                fontWeight={600}
                 color={linkColor}
                 _hover={{
                   textDecoration: "none",
@@ -93,6 +96,7 @@ const DesktopNav = () => {
                 }}
                 display="flex"
                 alignItems="center"
+                whiteSpace="nowrap"
               >
                 {navItem.label}
                 {navItem.children && <ChevronDownIcon ml={2} />}
@@ -217,6 +221,10 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
+    label: "Home",
+    href: "/",
+  },
+  {
     label: "Real Estate Portfolio",
     href: "/real-estate-portfolio",
   },
@@ -230,8 +238,4 @@ const NAV_ITEMS: Array<NavItem> = [
       },
     ],
   },
-  // {
-  //   label: "Blog",
-  //   href: "/blog",
-  // },
 ];
