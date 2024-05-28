@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Center, Link, Stack, Text } from "@chakra-ui/react";
+import { Button, Center, Link, Stack, Text, useBreakpointValue } from "@chakra-ui/react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { SiLinkedin } from "react-icons/si";
 
@@ -10,7 +10,9 @@ type SocialButtonsProps = {
   instagramLink: string;
 };
 
-export default function SocialMediaButtons({ instagramLink, linkedinLink }: SocialButtonsProps) {
+export default function SocialMediaButtons({ facebookLink, instagramLink, linkedinLink }: SocialButtonsProps) {
+  const isFacebookDisabled = useBreakpointValue({ base: true, md: false });
+
   return (
     <Stack spacing={4} mt={4}>
       <Link href={linkedinLink} isExternal w={"full"}>
@@ -47,22 +49,24 @@ export default function SocialMediaButtons({ instagramLink, linkedinLink }: Soci
         </Button>
       </Link>
 
-      <Button
-        w={"full"}
-        colorScheme={"facebook"}
-        leftIcon={<FaFacebook />}
-        _hover={{
-          transform: "translateY(-2px)",
-          boxShadow: "lg",
-        }}
-        isDisabled
-        opacity={0.6} // to visually indicate the button is disabled
-        cursor="not-allowed" // change cursor to indicate non-clickable
-      >
-        <Center>
-          <Text>Facebook</Text>
-        </Center>
-      </Button>
+      <Link href={facebookLink} isExternal w={"full"}>
+        <Button
+          w={"full"}
+          colorScheme={"facebook"}
+          leftIcon={<FaFacebook />}
+          _hover={{
+            transform: "translateY(-2px)",
+            boxShadow: "lg",
+          }}
+          isDisabled={isFacebookDisabled}
+          opacity={isFacebookDisabled ? 0.6 : 1} // to visually indicate the button is disabled
+          cursor={isFacebookDisabled ? "not-allowed" : "pointer"} // change cursor to indicate non-clickable
+        >
+          <Center>
+            <Text>Facebook</Text>
+          </Center>
+        </Button>
+      </Link>
     </Stack>
   );
 }
