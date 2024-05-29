@@ -4,6 +4,8 @@ import {
   Badge,
   Box,
   Center,
+  Flex,
+  Icon,
   List,
   ListIcon,
   ListItem,
@@ -18,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { addMonths, differenceInDays, differenceInMonths } from "date-fns";
 import { FaCheck, FaInfoCircle, FaTimes } from "react-icons/fa";
+import { FaA, FaC, FaD, FaE, FaI, FaN, FaO, FaR, FaS, FaT, FaV } from "react-icons/fa6";
 
 export default function Properties() {
   const properties = [
@@ -85,8 +88,36 @@ export default function Properties() {
   const textColor = useColorModeValue("gray.800", "white");
   const listBgColor = useColorModeValue("gray.50", "gray.900");
 
+  // Define the icons for each word
+  const accreditedIcons = [FaA, FaC, FaC, FaR, FaE, FaD, FaI, FaT, FaE, FaD];
+  const investorsIcons = [FaI, FaN, FaV, FaE, FaS, FaT, FaO, FaR, FaS];
+
   return (
     <Box maxW="1200px" mx="auto" px={4}>
+      <Center
+        w="100%"
+        py={4}
+        mb={6}
+        bgGradient="linear(to-r, rgba(255, 255, 255, 0), rgba(0, 128, 128, 0.1), rgba(0, 128, 128, 0.1), rgba(255, 255, 255, 0))"
+        color="gray.700"
+        fontSize="lg"
+        fontWeight="bold"
+        textAlign="center"
+        flexDirection="column"
+      >
+        <Flex align="center" gap={1}>
+          <Icon as={FaCheck} boxSize={5} color="teal.500" />
+          {accreditedIcons.map((IconComponent, index) => (
+            <Icon as={IconComponent} boxSize={4} key={`accredited-${index}`} color="teal.500" />
+          ))}
+        </Flex>
+        <Flex align="center" gap={1} mt={2}>
+          <Icon as={FaCheck} boxSize={5} color="purple.500" />
+          {investorsIcons.map((IconComponent, index) => (
+            <Icon as={IconComponent} boxSize={4} key={`investors-${index}`} color="purple.500" />
+          ))}
+        </Flex>
+      </Center>
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6} py={6}>
         {properties.map((property, index) => (
           <Center key={index} position="relative">
