@@ -1,7 +1,8 @@
 "use client";
-import { CopyIcon } from "@chakra-ui/icons";
+import { CheckIcon, CopyIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Heading, Image, Stack, Text, useColorModeValue, useToast } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import AvatarWithRipple from "./AvatarWithRipple";
 import SocialMediaButtons from "./SocialMediaButtons";
 
@@ -20,6 +21,7 @@ type CardsProps = {
 const Cards = ({ name, role, avatarSrc, email, instagramLink, facebookLink, linkedinLink }: CardsProps) => {
   const bgColor = useColorModeValue("white", "gray.800");
   const toast = useToast();
+  const [icon, setIcon] = useState(<CopyIcon />);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email).then(
@@ -30,6 +32,8 @@ const Cards = ({ name, role, avatarSrc, email, instagramLink, facebookLink, link
           duration: 2000,
           isClosable: true,
         });
+        setIcon(<CheckIcon />);
+        setTimeout(() => setIcon(<CopyIcon />), 2000); // Revert icon after 2 seconds
       },
       (err) => {
         toast({
@@ -74,7 +78,7 @@ const Cards = ({ name, role, avatarSrc, email, instagramLink, facebookLink, link
             _hover={{ bg: useColorModeValue("teal.100", "teal.900") }}
             size="sm"
           >
-            <CopyIcon />
+            {icon}
           </Button>
         </Flex>
         <SocialMediaButtons instagramLink={instagramLink} facebookLink={facebookLink} linkedinLink={linkedinLink} />
