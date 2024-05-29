@@ -15,12 +15,11 @@ import {
   TagLabel,
   TagLeftIcon,
   Text,
-  Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { addMonths, differenceInDays, differenceInMonths } from "date-fns";
-import { FaCheck, FaInfoCircle, FaTimes } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import { FaA, FaC, FaD, FaE, FaI, FaN, FaO, FaR, FaS, FaT, FaV } from "react-icons/fa6";
+import { MdSell } from "react-icons/md";
 
 export default function Properties() {
   const properties = [
@@ -75,15 +74,6 @@ export default function Properties() {
     },
   ];
 
-  const calculateHoldDuration = (purchasedDate: string, soldDate: string) => {
-    const start = new Date(purchasedDate);
-    const end = new Date(soldDate);
-    const months = differenceInMonths(end, start);
-    const intermediateDate = addMonths(start, months);
-    const days = differenceInDays(end, intermediateDate);
-    return `${months > 0 ? `${months} month${months > 1 ? "s" : ""} ` : ""}${days > 0 ? `${days} day${days > 1 ? "s" : ""}` : ""}`;
-  };
-
   const bgColor = useColorModeValue("white", "gray.800");
   const textColor = useColorModeValue("gray.800", "white");
   const listBgColor = useColorModeValue("gray.50", "gray.900");
@@ -136,7 +126,7 @@ export default function Properties() {
                     display="flex"
                     alignItems="center"
                   >
-                    <FaTimes style={{ marginRight: "4px" }} /> SOLD
+                    <MdSell style={{ marginRight: "4px" }} /> SOLD
                   </Badge>
                 ) : (
                   <Badge
@@ -195,15 +185,9 @@ export default function Properties() {
                   {property.sold && property.soldDate && (
                     <>
                       <Tag size="lg" colorScheme="red" borderRadius="full" ml={2}>
-                        <TagLeftIcon as={FaTimes} />
+                        <TagLeftIcon as={MdSell} />
                         <TagLabel>Sold: {property.soldDate}</TagLabel>
                       </Tag>
-                      <Tooltip label={`Held for ${calculateHoldDuration(property.purchasedDate, property.soldDate)}`}>
-                        <Tag size="lg" colorScheme="blue" borderRadius="full" ml={2} cursor="pointer">
-                          <TagLeftIcon as={FaInfoCircle} />
-                          <TagLabel>{`Held: ${calculateHoldDuration(property.purchasedDate, property.soldDate)}`}</TagLabel>
-                        </Tag>
-                      </Tooltip>
                     </>
                   )}
                 </Box>
