@@ -1,6 +1,7 @@
 "use client";
 
 import { Avatar, Box, Flex, SimpleGrid, Text, chakra, useColorModeValue } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 
 const testimonials = [
   {
@@ -73,10 +74,12 @@ interface TestimonialCardProps {
   index: number;
 }
 
+const MotionFlex = motion(Flex);
+
 function TestimonialCard(props: TestimonialCardProps) {
   const { name, role, content, avatar, index } = props;
   return (
-    <Flex
+    <MotionFlex
       boxShadow={"lg"}
       maxW={"640px"}
       direction={{ base: "column-reverse", md: "row" }}
@@ -109,6 +112,9 @@ function TestimonialCard(props: TestimonialCardProps) {
         top: 0,
         left: 0,
       }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.2 }}
     >
       <Flex direction={"column"} textAlign={"left"} justifyContent={"space-between"}>
         <chakra.p fontFamily={"Inter"} fontWeight={"medium"} fontSize={"15px"} pb={4}>
@@ -129,7 +135,7 @@ function TestimonialCard(props: TestimonialCardProps) {
         alignSelf={"center"}
         m={{ base: "0 0 35px 0", md: "0 0 0 50px" }}
       />
-    </Flex>
+    </MotionFlex>
   );
 }
 
@@ -153,7 +159,7 @@ export default function GridBlurredBackdrop() {
           Business Club Event
         </chakra.h2>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10} mt={6}>
-          <Box
+          <MotionFlex
             p={6}
             bg={useColorModeValue("white", "gray.800")}
             borderRadius="md"
@@ -163,6 +169,9 @@ export default function GridBlurredBackdrop() {
             alignItems="center"
             maxW="800px"
             mx="auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
             <Box flex="1">
               <chakra.h2
@@ -196,9 +205,9 @@ export default function GridBlurredBackdrop() {
                 Don’t miss this chance to engage with industry leaders and fellow professionals!
               </Text>
             </Box>
-          </Box>
+          </MotionFlex>
 
-          <Box
+          <MotionFlex
             p={6}
             bg={useColorModeValue("blue.100", "blue.800")}
             borderRadius="md"
@@ -208,6 +217,9 @@ export default function GridBlurredBackdrop() {
             alignItems="center"
             maxW="800px"
             mx="auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Box flex="1">
               <chakra.h2
@@ -239,7 +251,7 @@ export default function GridBlurredBackdrop() {
               </Text>
             </Box>
             <Avatar src="/naiya-mehta.jpeg" height={"80px"} width={"80px"} ml={4} />
-          </Box>
+          </MotionFlex>
         </SimpleGrid>
       </Box>
 

@@ -1,3 +1,4 @@
+// components/Properties.tsx
 "use client";
 import { CheckIcon } from "@chakra-ui/icons";
 import {
@@ -17,9 +18,12 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import { FaCheck } from "react-icons/fa";
 import { FaA, FaC, FaD, FaE, FaI, FaN, FaO, FaR, FaS, FaT, FaV } from "react-icons/fa6";
 import { MdSell } from "react-icons/md";
+
+const MotionBox = motion(Box);
 
 export default function Properties() {
   const properties = [
@@ -111,7 +115,17 @@ export default function Properties() {
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6} py={6}>
         {properties.map((property, index) => (
           <Center key={index} position="relative">
-            <Box maxW={"330px"} w={"full"} bg={bgColor} boxShadow={"2xl"} rounded={"md"} overflow={"hidden"}>
+            <MotionBox
+              maxW={"330px"}
+              w={"full"}
+              bg={bgColor}
+              boxShadow={"2xl"}
+              rounded={"md"}
+              overflow={"hidden"}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+            >
               <Box position="relative">
                 <Box h={"160px"} bgImage={`url(${property.imageUrl})`} bgSize={"cover"} bgPosition={"center"} />
                 {property.sold ? (
@@ -192,7 +206,7 @@ export default function Properties() {
                   )}
                 </Box>
               </Box>
-            </Box>
+            </MotionBox>
           </Center>
         ))}
       </SimpleGrid>
