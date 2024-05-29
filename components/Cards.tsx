@@ -13,12 +13,28 @@ type CardsProps = {
   role: string;
   avatarSrc: string;
   email: string;
+  phone: string;
+  address: string;
+  company: string;
+  website: string;
   instagramLink: string;
   facebookLink: string;
   linkedinLink: string;
 };
 
-const Cards = ({ name, role, avatarSrc, email, instagramLink, facebookLink, linkedinLink }: CardsProps) => {
+const Cards = ({
+  name,
+  role,
+  avatarSrc,
+  email,
+  phone,
+  address,
+  company,
+  website,
+  instagramLink,
+  facebookLink,
+  linkedinLink,
+}: CardsProps) => {
   const bgColor = useColorModeValue("white", "gray.800");
   const toast = useToast();
   const [icon, setIcon] = useState(<CopyIcon />);
@@ -81,7 +97,19 @@ const Cards = ({ name, role, avatarSrc, email, instagramLink, facebookLink, link
             {icon}
           </Button>
         </Flex>
-        <SocialMediaButtons instagramLink={instagramLink} facebookLink={facebookLink} linkedinLink={linkedinLink} />
+        <SocialMediaButtons
+          instagramLink={instagramLink}
+          facebookLink={facebookLink}
+          linkedinLink={linkedinLink}
+          name={name}
+          role={role}
+          email={email}
+          phone={phone}
+          address={address}
+          company={company}
+          website={website}
+          avatarSrc={avatarSrc}
+        />
       </Box>
     </MotionBox>
   );
