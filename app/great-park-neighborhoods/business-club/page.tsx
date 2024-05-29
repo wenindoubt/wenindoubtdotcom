@@ -1,7 +1,7 @@
 "use client";
-
-import { Avatar, Box, Flex, SimpleGrid, Text, chakra, useColorModeValue } from "@chakra-ui/react";
+import { Avatar, Box, Flex, Link, SimpleGrid, Text, chakra, useColorModeValue } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import { FaCalendarAlt } from "react-icons/fa";
 
 const testimonials = [
   {
@@ -139,7 +139,40 @@ function TestimonialCard(props: TestimonialCardProps) {
   );
 }
 
+const generateGoogleCalendarLink = (
+  title: string,
+  details: string,
+  location: string,
+  startDate: string,
+  endDate: string,
+) => {
+  const baseUrl = "https://calendar.google.com/calendar/r/eventedit";
+  const params = new URLSearchParams({
+    text: title,
+    details: details,
+    location: location,
+    dates: `${startDate}/${endDate}`,
+  });
+  return `${baseUrl}?${params.toString()}`;
+};
+
 export default function GridBlurredBackdrop() {
+  const businessClubEventLink = generateGoogleCalendarLink(
+    "Business Club Event",
+    "Join us for insightful presentations, valuable networking opportunities, and engaging discussions with top industry leaders and like-minded professionals.",
+    "Rise Clubhouse, 238 Merit, Irvine, CA 92618",
+    "20240604T190000",
+    "20240604T210000",
+  );
+
+  const upcomingEventLink = generateGoogleCalendarLink(
+    "How to Build a Business",
+    "Topic: How to Build a Business\nPresenter: Naiya Mehta, Attorney & Investor @ Lyric Investment Group\nJoin us for valuable networking, insightful presentations, and engaging discussions with industry leaders. Expand your knowledge and grow your business connections.",
+    "Rise Clubhouse, 238 Merit, Irvine, CA 92618",
+    "20240604T190000",
+    "20240604T210000",
+  );
+
   return (
     <Flex textAlign={"center"} justifyContent={"center"} direction={"column"} width={"full"} overflow={"hidden"}>
       <Box
@@ -158,6 +191,9 @@ export default function GridBlurredBackdrop() {
         >
           Business Club Event
         </chakra.h2>
+        <Text fontSize={18} fontFamily={"Inter"} color={useColorModeValue("gray.600", "gray.300")}>
+          Connect, Learn, and Grow with Industry Leaders
+        </Text>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10} mt={6}>
           <MotionFlex
             p={6}
@@ -187,7 +223,20 @@ export default function GridBlurredBackdrop() {
                 <chakra.span fontWeight={"bold"} color={useColorModeValue("gray.700", "gray.50")}>
                   When:
                 </chakra.span>{" "}
-                First Tuesday of every month
+                First Tuesday of every month{" "}
+              </Text>
+              <Text fontSize={18} fontFamily={"Inter"} color={useColorModeValue("gray.600", "gray.300")} mb={2}>
+                <chakra.span fontWeight={"bold"} color={useColorModeValue("gray.700", "gray.50")}>
+                  Where:
+                </chakra.span>{" "}
+                <chakra.span
+                  fontFamily={"Inter"}
+                  fontWeight={"semibold"}
+                  color={useColorModeValue("teal.500", "teal.300")}
+                >
+                  Rise Clubhouse
+                </chakra.span>
+                , 238 Merit, Irvine, CA 92618{" "}
               </Text>
               <Text fontSize={18} fontFamily={"Inter"} color={useColorModeValue("gray.600", "gray.300")} mb={2}>
                 <chakra.span fontWeight={"bold"} color={useColorModeValue("gray.700", "gray.50")}>
@@ -202,7 +251,8 @@ export default function GridBlurredBackdrop() {
                 Connect and grow your network from 8:00 PM - 9:00 PM
               </Text>
               <Text fontSize={18} fontFamily={"Inter"} color={useColorModeValue("gray.600", "gray.300")} mt={6}>
-                Don’t miss this chance to engage with industry leaders and fellow professionals!
+                Join us for valuable networking, insightful presentations, and engaging discussions with industry
+                leaders. Expand your knowledge and grow your business connections.
               </Text>
             </Box>
           </MotionFlex>
@@ -228,14 +278,53 @@ export default function GridBlurredBackdrop() {
                 fontWeight={"bold"}
                 color={useColorModeValue("gray.700", "gray.50")}
                 mb={4}
+                display="flex"
+                flexDirection={{ base: "column", md: "row" }}
+                alignItems={{ base: "flex-start", md: "center" }}
+                justifyContent={{ base: "flex-start", md: "space-between" }}
               >
-                Next Upcoming Event
+                Upcoming Event
+                <Link
+                  href={upcomingEventLink}
+                  isExternal
+                  display="flex"
+                  alignItems="center"
+                  bg={useColorModeValue("blue.50", "blue.900")}
+                  p={2}
+                  borderRadius="md"
+                  mt={{ base: 2, md: 0 }}
+                  _hover={{ textDecoration: "none", bg: useColorModeValue("blue.100", "blue.800") }}
+                >
+                  <FaCalendarAlt style={{ display: "inline", marginRight: "5px" }} />
+                  <chakra.span
+                    fontFamily={"Inter"}
+                    fontWeight={"medium"}
+                    fontSize={16}
+                    color={useColorModeValue("blue.700", "blue.200")}
+                  >
+                    Add to Google Calendar
+                  </chakra.span>
+                </Link>
               </chakra.h2>
+
               <Text fontSize={18} fontFamily={"Inter"} color={useColorModeValue("gray.600", "gray.300")} mb={2}>
                 <chakra.span fontWeight={"bold"} color={useColorModeValue("gray.700", "gray.50")}>
                   When:
                 </chakra.span>{" "}
-                Tuesday, June 4th 2024 from 7:00 PM - 9:00 PM
+                Tuesday, June 4th 2024 from 7:00 PM - 9:00 PM{" "}
+              </Text>
+              <Text fontSize={18} fontFamily={"Inter"} color={useColorModeValue("gray.600", "gray.300")} mb={2}>
+                <chakra.span fontWeight={"bold"} color={useColorModeValue("gray.700", "gray.50")}>
+                  Where:
+                </chakra.span>{" "}
+                <chakra.span
+                  fontFamily={"Inter"}
+                  fontWeight={"semibold"}
+                  color={useColorModeValue("teal.500", "teal.300")}
+                >
+                  Rise Clubhouse
+                </chakra.span>
+                , 238 Merit, Irvine, CA 92618{" "}
               </Text>
               <Text fontSize={18} fontFamily={"Inter"} color={useColorModeValue("gray.600", "gray.300")} mb={2}>
                 <chakra.span fontWeight={"bold"} color={useColorModeValue("gray.700", "gray.50")}>
