@@ -1,3 +1,4 @@
+// components/NavBar.tsx
 "use client";
 import { ChevronDownIcon, ChevronRightIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
@@ -15,21 +16,25 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
+  const bgColor = useColorModeValue("white", "gray.800");
+  const color = useColorModeValue("gray.600", "white");
+  const borderColor = useColorModeValue("gray.200", "gray.900");
 
   return (
     <Box>
       <Flex
-        bg={useColorModeValue("white", "gray.800")}
-        color={useColorModeValue("gray.600", "white")}
+        bg={bgColor}
+        color={color}
         minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        borderColor={borderColor}
         align={"center"}
         justify={"space-between"}
         wrap="nowrap"
@@ -71,8 +76,10 @@ export default function Navbar() {
 }
 
 const DesktopNav = () => {
+  const pathname = usePathname();
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
+  const activeLinkColor = useColorModeValue("red.600", "red.300");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
@@ -86,7 +93,7 @@ const DesktopNav = () => {
                 href={navItem.href ?? "#"}
                 fontSize={{ base: "xl", md: "2xl" }}
                 fontWeight={600}
-                color={linkColor}
+                color={pathname === navItem.href ? activeLinkColor : linkColor}
                 _hover={{
                   textDecoration: "none",
                   color: linkHoverColor,
@@ -117,18 +124,19 @@ const DesktopNav = () => {
 };
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+  const pathname = usePathname();
+  const bgHover = useColorModeValue("red.50", "gray.900");
+
   return (
-    <Link
-      href={href}
-      role={"group"}
-      display={"block"}
-      p={2}
-      rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
-    >
+    <Link href={href} role={"group"} display={"block"} p={2} rounded={"md"} _hover={{ bg: bgHover }}>
       <Stack direction={"row"} align={"center"}>
         <Box>
-          <Text transition={"all .3s ease"} _groupHover={{ color: "pink.400" }} fontWeight={500}>
+          <Text
+            transition={"all .3s ease"}
+            _groupHover={{ color: "red.400" }}
+            fontWeight={500}
+            color={pathname === href ? "red.400" : "inherit"}
+          >
             {label}
           </Text>
           <Text fontSize={"sm"}>{subLabel}</Text>
@@ -142,7 +150,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           align={"center"}
           flex={1}
         >
-          <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={"red.400"} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
@@ -161,6 +169,8 @@ const MobileNav = () => {
 
 const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure();
+  const pathname = usePathname();
+  const textColor = useColorModeValue("gray.600", "gray.200");
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
@@ -174,7 +184,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           textDecoration: "none",
         }}
       >
-        <Text fontWeight={600} fontSize={"2xl"} color={useColorModeValue("gray.600", "gray.200")}>
+        <Text fontWeight={600} fontSize={"2xl"} color={pathname === href ? "pink.400" : textColor}>
           {label}
         </Text>
         {children && (

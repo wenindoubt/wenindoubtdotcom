@@ -29,14 +29,14 @@ export default function Properties() {
   const properties = [
     {
       title: "Primary",
-      price: "1.2 M",
+      price: "2.18 M",
       imageUrl:
-        "https://d136ifrww9cs61.cloudfront.net/3610/conversions/8bcea09f27f4d88a166a37210d39d876-image_cropped.jpg",
+        "https://d136ifrww9cs61.cloudfront.net/4458/f7c65eb2ab67eed228eb70fde806f14b.png",
       location: "Irvine, CA",
-      details: ["House Hacking", "Roommate", "Homebase"],
+      details: ["House Hacking", "Roommates", "Homebase"],
       color: "green.500",
       bgColor: "green.50",
-      purchasedDate: "12-20-2021",
+      purchasedDate: "09-09-2024",
       sold: false,
     },
     {
@@ -60,8 +60,21 @@ export default function Properties() {
       details: ["61-Units", "Syndication", "Limited Partners"],
       color: "purple.500",
       bgColor: "green.50",
-      purchasedDate: "05-31-2024",
+      purchasedDate: "10-04-2024",
       sold: false,
+    },
+    {
+      title: "Primary",
+      price: "1.2 M",
+      imageUrl:
+        "https://d136ifrww9cs61.cloudfront.net/3610/conversions/8bcea09f27f4d88a166a37210d39d876-image_cropped.jpg",
+      location: "Irvine, CA",
+      details: ["House Hacking", "Roommate", "Homebase"],
+      color: "red.500",
+      bgColor: "red.50",
+      purchasedDate: "12-20-2021",
+      soldDate: "09-26-2024",
+      sold: true,
     },
     {
       title: "Investment",
